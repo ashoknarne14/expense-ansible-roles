@@ -16,7 +16,7 @@
     ansible.builtin.user:
       name: expense
 
-    - name: import role
+  - name: import role
     ansible.builtin.import_role:
       name: common
       tasks_from: main
