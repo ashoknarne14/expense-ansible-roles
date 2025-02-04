@@ -8,33 +8,41 @@
       name: nginx
       state: started
       enabled: yes
-  - name: remove the directory
-    ansible.builtin.file:
-      path: /usr/share/nginx/html
-      state: absent
+  
+  - name: import role
+    ansible.builtin.import_role:
+      name: common
+      tasks_from: main
+      
+  # - name: remove the directory
+  #   ansible.builtin.file:
+  #     path: /usr/share/nginx/html
+  #     state: absent
 
-  - name: create directory
-    ansible.builtin.file:
-      path: /usr/share/nginx/html
-      state: directory
+  # - name: create directory
+  #   ansible.builtin.file:
+  #     path: /usr/share/nginx/html
+  #     state: directory
 
-  - name: download the code
-    ansible.builtin.get_url:
-      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-      dest: /tmp/frontend.zip
+  # - name: download the code
+  #   ansible.builtin.get_url:
+  #     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+  #     dest: /tmp/frontend.zip
 
-  - name: extract the code
-    ansible.builtin.unarchive:
-      src: /tmp/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+  # - name: extract the code
+  #   ansible.builtin.unarchive:
+  #     src: /tmp/frontend.zip
+  #     dest: /usr/share/nginx/html
+  #     remote_src: yes
 
   - name: copy config file
     ansible.builtin.template:
       src: expense.conf.j2
       dest: /etc/nginx/default.d/expense.conf
+    notify:
+      - Restart nginx
   
-  - name: restart nginx service
+  - name: Restart nginx
     ansible.builtin.service:
       name: nginx
       state: restarted
