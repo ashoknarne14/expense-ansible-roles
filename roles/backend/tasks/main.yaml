@@ -16,6 +16,11 @@
     ansible.builtin.user:
       name: expense
 
+    - name: import role
+    ansible.builtin.import_role:
+      name: common
+      tasks_from: main
+
   # - name: create app directory
   #   ansible.builtin.file:
   #     path: /app
