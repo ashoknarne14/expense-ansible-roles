@@ -12,8 +12,8 @@
   - name: import role
     ansible.builtin.import_role:
       name: common
-      tasks_from: main
-      
+      tasks_from: app-pre-req
+
   # - name: remove the directory
   #   ansible.builtin.file:
   #     path: /usr/share/nginx/html
