@@ -1,0 +1,5 @@
+- name: confifure mysql server
+  hosts: mysql
+  become: yes
+  roles:
+  - mysql
