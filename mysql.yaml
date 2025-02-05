@@ -1,5 +1,7 @@
 - name: confifure mysql server
   hosts: mysql
   become: yes
+  var_files:
+  - /var/credentials_mysql.yaml
   roles:
   - mysql
