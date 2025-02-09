@@ -1,9 +1,10 @@
 - name: install nginx
-  hosts: all
+  hosts: 172.31.31.156
+  #hosts: all
   become: yes
   serial: 3
-  vars_files:
-    - /var/credentials.yaml
+  # vars_files:
+  #   - /var/credentials.yaml
   tasks:
   - name: install nginx
     ansible.builtin.package:
