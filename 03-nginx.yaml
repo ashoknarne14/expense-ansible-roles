@@ -1,6 +1,8 @@
 - name: install nginx
   hosts: all
   become: yes
+  vars_files:
+    - /var/credentials.yaml
   tasks:
   - name: install nginx
     ansible.builtin.package:
